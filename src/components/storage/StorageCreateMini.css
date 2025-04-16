@@ -1,0 +1,75 @@
+.storage-create-modal-container {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: calc(100vh * 9 / 20);
+    max-width: 100%;
+    height: 100vh;
+    z-index: 9999;
+  
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+
+    backdrop-filter: brightness(0.6);
+}
+
+.storage-create-modal-header {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    box-sizing: border-box;
+    position: relative;
+    
+    margin: 17px auto;
+}
+
+/* X 닫기 버튼 */
+.storage-create-modal-close {
+    width: 16px;
+    height: auto;
+    position: absolute;
+    left: 18px;
+    cursor: pointer;
+}
+
+/* 완료 버튼 */
+.storage-create-modal-done {
+    color: #0077FF;
+    font-size: 13px;
+    position: absolute;
+    right: 18px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.storage-create-modal-done:focus {
+  outline: none;
+}
+
+.storage-create-divider {
+    width: 100%;
+    height: 1.5px;
+    background-color: #ECECEC;
+    margin: 0 auto;
+    flex-shrink: 0
+}
+
+.storage-create-modal-box {
+    padding: 10px;
+}
+
+.storage-create-modal-input {
+    width: 94%;
+    padding: 10px;
+    color: black;
+    font-size: 13px;
+    border: none;
+    outline: none;
+    margin-bottom: 200px;
+}

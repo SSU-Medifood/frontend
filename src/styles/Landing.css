@@ -1,0 +1,87 @@
+.landing-container {
+    width: auto;
+    height: 100vh;
+    aspect-ratio: 9/20; /* 9:20 비율 (필요에 따라 조정) */
+
+    background-image: linear-gradient(to bottom, rgba(255,255,255,0.4), rgba(0,0,0,0.8)),
+                      url('/images/landing-bg.png');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Log in 버튼 */
+.landing-login {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+
+    background-color: black;
+    color: white;
+    font-size: 0.8rem;
+    font-weight: bold;
+
+    padding: 6px 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.landing-login:hover {
+    background-color: #333;
+}
+
+.landing-content {
+    position: relative;
+    text-align: center;
+}
+  
+/* MEFO 로고 */
+.landing-logo {
+    width: 170px;
+    height: auto;
+    margin-bottom: 10px;
+}
+  
+/* 서비스 설명 */
+.landing-text {
+    color: white;
+    font-size: 1rem;
+    margin-bottom: 30px;
+}
+
+/* Get Started 버튼 */
+.landing-signup {
+    width: 100%;
+    background-color: white;
+    color: black;
+    font-size: 1.1rem;
+    font-weight: bold;
+
+    padding: 16px 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+
+    transition: background 0.3s ease;
+}
+  
+.landing-signup:hover {
+    background-color: black;
+    color: white;
+    font-weight: bold;
+}
+
+.landing-login:focus,
+.landing-signup:focus {
+    outline: none;
+}

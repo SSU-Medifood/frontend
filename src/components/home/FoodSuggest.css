@@ -1,0 +1,60 @@
+/* FoodSuggest.jsx의 css */
+
+.suggest-section {
+    width: 100%;
+    margin-bottom: 10px;
+}
+  
+.suggest-title {
+    color: black;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 0 30px;
+    margin-bottom: 15px;
+}
+
+.suggest-card-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* 아래부터 FoodCard.jsx의 css */
+
+/* 카드 개별 style */
+.suggest-card {
+    max-width: 125px;
+    min-width: 125px;
+    padding: 13px 20px;
+    border-radius: 10px;
+    box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.15);
+
+    /* 아이콘 정렬용 */
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+  
+.suggest-card.bad {
+    background-color: #394238;
+    color: white;
+}
+  
+.suggest-card.good {
+    background-color: #ffffff;
+    color: black;
+}
+
+.suggest-text {
+    font-size: 11px;
+    font-weight: bold;
+    line-height: 1.5; /* 행간 */
+}
+
+.suggest-icon {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    width: 20px;
+    height: auto;
+}

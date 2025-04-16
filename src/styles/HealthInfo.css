@@ -1,0 +1,56 @@
+/* 버튼 그룹 스타일 */
+.button-group {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+/* 버튼 스타일 */
+.button-group button {
+    width: 85px;
+    height: 30px;
+    border-radius: 20px;
+    border: none;
+    background-color: #E6E6E6;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button-group button.selected {
+    background-color: black;
+    color: white;
+}
+
+.button-group button:focus {
+    outline: none;
+}
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-text {
+    position: absolute;
+    right: 13px;
+    font-size: 14px;
+    color: #999999;
+    pointer-events: none;
+}
+
+.search-box {
+    width: 90%;
+    padding: 13px;
+    font-size: 13px;
+    border: 1px solid #D8DADC;
+    border-radius: 8px;
+    background-color: #FFFFFF;
+    color: #999999;
+}

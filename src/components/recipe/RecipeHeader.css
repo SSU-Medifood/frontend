@@ -1,0 +1,29 @@
+.recipe-header {
+    width: 100%;
+    display: flex;
+    padding: 17px;
+    box-sizing: border-box;
+}
+
+/* 뒤로가기 버튼 */
+.recipe-back {
+    width: 20px;
+    height: auto;
+    cursor: pointer;
+}
+
+/* 레시피 제목 */
+.recipe-title {
+    color: black;
+    font-size: 14px;
+    font-weight: bold;
+    flex: 1;
+    margin: 0;
+    margin-left: 15px;
+}
+
+.storage-icon {
+    width: 20px;
+    height: auto;
+    cursor: pointer;
+}

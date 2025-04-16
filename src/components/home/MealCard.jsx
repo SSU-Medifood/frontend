@@ -1,0 +1,22 @@
+import { useNavigate } from 'react-router-dom'
+import './MealCard.css'
+
+function MealCard({ time, name, image }) {
+    const navigate = useNavigate()
+
+    const handleClick = () => {
+        if (name === '매운 쇠고기 갈비찜') { navigate('/recipe/galbijjim'); }
+    }
+
+    return (
+        <div className="meal-card-wrapper" onClick={handleClick}>
+            <span className="meal-time">{time}</span>
+            <div className="meal-card">
+                <img src={image} alt={name} className="meal-image" />
+                <p className="meal-name">{name}</p>
+            </div>
+        </div>
+    )
+}
+
+export default MealCard

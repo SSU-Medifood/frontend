@@ -1,0 +1,159 @@
+.medication-container {
+    width: auto;
+    height: 100vh;
+    aspect-ratio: 9/20; /* 9:20 비율 (필요에 따라 조정) */
+
+    overflow-y: auto;
+    scrollbar-width: none;        /* Firefox */
+    -ms-overflow-style: none;     /* IE, Edge */
+
+    background-color: white;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.medication-divider {
+    width: 90%;
+    height: 1.5px;
+    background-color: #B5B5B5;
+    margin: 0 auto;
+    flex-shrink: 0
+}
+
+.medication-header {
+    width: 100%;
+    display: flex;
+    padding: 17px;
+    box-sizing: border-box;
+}
+
+/* 뒤로가기 버튼 */
+.medication-back {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+/* 약 관리 */
+.medication-title {
+    color: black;
+    font-size: 14px;
+    font-weight: bold;
+    flex: 1;
+    margin: 0;
+    margin-left: 15px;
+}
+
+/* 복용약 등록 버튼 */
+.medication-register {
+    color: white;
+    font-size: 11px;
+    font-weight: bold;
+
+    background-color: black;
+    width: 90px;
+    height: 30px;
+    border-radius: 30px;
+    border: none;
+
+    margin: -5px;
+}
+
+.medication-register:focus {
+    outline: none;
+}
+
+/* 현재 복용중인 약 */
+.medication-sub-title-1 {
+    color: black;
+    font-size: 14px;
+    font-weight: bold;
+
+    /* 위 왼 아래 */
+    margin: 5px 25px 10px;
+}
+
+/* 영양제 섭취 시간을 추천해드릴게요 */
+.medication-sub-title-2 {
+    color: black;
+    font-size: 14px;
+    font-weight: bold;
+
+    /* 위 왼 아래 */
+    margin: 25px 25px 10px;
+}
+
+.medication-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto 18px;
+}
+  
+.medication-item {
+    box-sizing: border-box;
+    padding: 8px 30px;
+}
+  
+.medication-name-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.medication-name {
+    color: black;
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.medication-button-group {
+    display: flex;
+    gap: 10px;
+}
+
+.medication-delete,
+.medication-edit {
+    font-size: 13px;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.medication-delete:focus,
+.medication-edit:focus {
+  outline: none;
+}
+  
+.medication-detail-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 13px;
+}  
+
+.medication-detail {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    background-color: #E6E6E6;
+    width: 80px;
+    height: 30px;
+    border-radius: 30px;
+    
+    color: #4A4A4A;
+    font-size: 12px;
+    font-weight: bold;
+
+    box-sizing: border-box;
+    margin: 0;
+}

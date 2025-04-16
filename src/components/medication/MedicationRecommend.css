@@ -1,0 +1,75 @@
+.recommend-container {
+    padding: 0 23px;
+}
+  
+.recommend-list {
+    display: flex;
+    gap: 10px;
+}
+
+.recommend-supplementary {
+    color: black;
+    font-size: 12px;
+    line-height: 1.8;
+    padding: 5px 10px;
+    margin-bottom: 90px;
+}
+
+.recommend-wrapper {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.recommend-time {
+    color: black;
+    font-size: 13px;
+    font-weight: bold;
+    text-align: center;
+
+    background-color: #FFFADE;
+    box-shadow: 4px 4px 8px rgba(0,0,0,0.25);
+    padding: 5px;
+    margin: 0;
+}
+  
+.recommend-box {
+    flex: 1;
+    background-color: white;
+    box-shadow: 4px 4px 8px rgba(0,0,0,0.25);
+    padding: 5px;
+}
+  
+.recommend-box ul {
+    padding: 0;
+    margin: 2px;
+}
+  
+.recommend-box li {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    margin-bottom: 10px;
+}
+
+.recommend-label {
+    color: black;
+    font-size: 12px;
+    display: flex;
+    gap: 7px;
+}
+  
+.recommend-desc {
+    color: black;
+    font-size: 12px;
+    white-space: pre-line;
+    margin: 0;
+}
+
+.recommend-subDesc {
+    color: #7C7C7C;
+    font-size: 10px;
+    white-space: pre-line;
+    margin: 0;
+}

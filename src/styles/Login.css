@@ -1,0 +1,100 @@
+/* 로그인 관련 CSS */
+
+/* MEFO 로고 */
+.login-logo {
+    margin-top: 290px; /* 300px -> 290px로 수정 */
+    width: 130px;
+    height: auto;
+    margin-bottom: 40px;
+}
+
+.login-content {
+    width: 70%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* 입력 필드 위 글씨 */
+.input-label {
+    margin-top: 10px;
+    color: black;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* 입력 필드 */
+.input-field {
+    background-color: #FAFAFA;
+    color: black;
+    font-size: 14px;
+    padding: 14px;
+    border: 1px solid #DBDBDB;
+    border-radius: 8px;
+    width: 90%;
+}
+
+.input-field:focus {
+    outline: none;
+}
+
+.PW-content {
+    position: relative;
+}
+
+/* 비밀번호 토글 */
+.PW-toggle {
+    width: 17px;
+    height: auto;
+    position: absolute;
+    right: 13px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+/* 비밀번호를 잊으셨나요? */
+.PW-forgot {
+    text-align: right;
+    color: black;
+    font-size: 13px;
+    cursor: pointer;
+    margin-top: 1px;
+}
+  
+ /* 로그인 버튼 */
+.login-button {
+    margin-top: 15px;
+    background-color: black;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+  
+.login-button:hover {
+  background-color: #333;
+}
+
+.login-button:focus {
+    outline: none;
+}
+  
+/* 계정이 없으신가요? */
+.login-signup-text {
+    position: absolute;
+    color: black;
+    font-size: 14px;
+    bottom: 25px;
+}
+  
+/* 가입하기 */
+.login-signup-link {
+    font-weight: bold;
+    cursor: pointer;
+}

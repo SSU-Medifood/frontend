@@ -1,0 +1,47 @@
+.menu-grid-section {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 15px;
+    margin-bottom: 120px;
+}
+  
+.grid-title {
+    color: black;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 0 13px;
+    margin-bottom: 15px;
+}
+  
+.menu-grid {
+    max-width: 360px;
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    margin: 0 auto;
+    justify-content: center;
+    gap: 21px;
+}
+  
+.menu-card {
+    max-width: 100px;
+    border-radius: 10px;
+    box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.15);
+    background: #FFFDF3;
+    text-align: center;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.menu-image {
+    width: 100%;
+    aspect-ratio: 1/1;
+    border-radius: 10px 10px 0 0;
+    object-fit: cover;
+}
+  
+.menu-name {
+    color: black;
+    font-size: 9px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
