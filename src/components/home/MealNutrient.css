@@ -1,0 +1,64 @@
+.nutrient-container {
+    margin-top: 13px;
+    padding: 0 15px;
+}
+
+.calorie-wrapper {
+    display: flex;
+    margin-bottom: 5px;
+}
+
+.calorie-emoji {
+    font-size: 15px;
+}
+  
+.calorie-text {
+    color: black;
+    font-size: 12px;
+    font-weight: bold;
+    margin-top: 3px;
+    margin-left: 3px;
+}
+
+.nutrient-text {
+    color: #888;
+    font-size: 10px;
+    margin-top: 5px;
+    margin-left: auto;
+    padding-right: 4px;
+}
+  
+.nutrient-bar-wrapper {
+    display: flex;
+    height: 30px;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 4px 4px 6px rgba(0,0,0,0.13);
+}
+
+.nutrient-segment {
+    color: black;
+    font-size: 12px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* 글자 깨짐을 막기 위해 최소한의 폭을 보장 시켜줌 */
+    min-width: 30px;
+}
+
+.nutrient-labels {
+    display: flex;
+    margin-top: 5px;
+}
+
+.nutrient-label {
+    color: black;
+    font-size: 10px;
+    font-weight: bold;
+    text-align: center;
+
+    /* 글자 깨짐을 막기 위해 최소한의 폭을 보장 시켜줌 */
+    min-width: 30px;
+}

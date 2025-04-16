@@ -1,0 +1,44 @@
+.alarm-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+    margin-bottom: 80px;
+}
+  
+.alarm-wrapper {
+    display: flex;
+    gap: 10px;
+    margin: 0 5px;
+}
+
+.time-picker {
+    color: #7c7c7c;
+    font-size: 12px;
+    font-weight: bold;
+
+    background-color: #FAFAFA;
+    width: 320px;
+    height: 40px;
+    border: 1.5px solid #B5B5B5;
+    border-radius: 10px;
+    box-sizing: border-box;
+    padding: 0px 15px;
+}
+  
+.alarm-delete-button {
+    background: none;
+    border: none;
+    padding: 0px;
+    cursor: pointer;
+}
+
+.alarm-delete-button:focus {
+    outline: none;
+}
+
+.delete-icon {
+    width: 20px;
+    height: auto;
+    margin-top: 4px;
+}

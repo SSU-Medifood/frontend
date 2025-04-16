@@ -1,0 +1,51 @@
+/* MEFO 로고 */
+.signup-logo {
+    margin-top: 250px;
+    width: 130px;
+    height: auto;
+    margin-bottom: 5px;
+}
+
+/* 설명 텍스트 */
+.signup-text {
+    color: #6D6D6D;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 25px;
+}
+
+/* 중복확인 체크 아이콘 */
+.valid-check {
+    width: 15px;
+    height: auto;
+    position: absolute;
+    right: 13px;
+    top: 50%;
+    transform: translateY(-50%);
+    visibility: hidden;
+}
+
+.valid-check.show {
+    visibility: visible;
+}
+
+/* 중복확인 버튼 */
+.valid-button {
+    background-color: black;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.valid-button:hover {
+    background-color: #333;
+}
+
+.valid-button:focus {
+    outline: none;
+}

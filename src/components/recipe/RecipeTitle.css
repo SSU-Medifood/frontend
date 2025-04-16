@@ -1,0 +1,8 @@
+.recipe-main-title {
+    color: black;
+    font-size: 14px;
+    font-weight: bold;
+
+    /* 위 왼 아래 */
+    margin: 20px 25px 10px;
+}

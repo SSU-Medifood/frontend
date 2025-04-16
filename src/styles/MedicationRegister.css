@@ -1,0 +1,156 @@
+/* 완료 버튼 */
+.medication-register-complete {
+    color: #0077FF;
+    font-size: 14px;
+
+    background-color: transparent;
+    border: none;
+    padding: 0px;
+    margin: 0;
+}
+
+.medication-register-complete:focus {
+    outline: none;
+}
+
+/* 복용약을 등록해볼까요? */
+.register-title {
+    color: black;
+    font-size: 14px;
+    font-weight: bold;
+
+    /* 위 왼 아래 */
+    margin: 5px 25px 2px;
+}
+
+/* 복용중이신 약을 관리해드릴게요! */
+.register-title-comment {
+    color: #6D6D6D;
+    font-size: 11px;
+
+    /* 위 왼 아래 */
+    margin: 0 25px 20px;
+}
+
+.register-form-field {
+    width: 90%;
+    margin: 0 25px 15px;
+}
+
+/* 약 종류, 약 이름을 무엇으로~, 1회 투여량 등 제목들 */
+.register-form-label {
+    color: black;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.register-input-wrapper {
+    position: relative;
+    width: 94%;
+    margin: 5px 4px;
+}
+
+.register-input-wrapper input {
+    color: black;
+    font-size: 11px;
+    width: 94%;
+    border: none;
+    outline: none;
+}
+
+.register-input-wrapper input::placeholder {
+    color: #B0B0B0;
+}
+
+.clear-button {
+    font-size: 11px;
+    background: none;
+    border: none;
+    cursor: pointer;
+
+    position: absolute;
+    right: -5%;
+    top: 55%;
+    transform: translateY(-50%);
+}
+
+.clear-button:focus {
+    outline: none;
+}
+
+.register-underline {
+    width: 97%;
+    height: 1.5px;
+    background-color: #B5B5B5;
+    margin-bottom: 5px;
+}
+
+/* 버튼 그룹 */
+.register-button-group {
+    display: flex;
+    gap: 10px;
+    margin: 10px 0;
+}
+  
+.register-button {
+    background-color: #E6E6E6;
+    width: 80px;
+    height: 30px;
+    border-radius: 30px;
+
+    color: #4A4A4A;
+    font-size: 12px;
+    font-weight: bold;
+
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.register-button:focus {
+    outline: none;
+}
+  
+.register-button.selected {
+    color: white;
+    font-weight: bold;
+    background-color: black;
+}
+
+/* 일일 투여 횟수 증감 버튼 */
+.frequency-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 5px;
+}
+  
+.circle-button {
+    color: #3F3F3F;
+    font-size: 14px;
+    font-weight: bold;
+
+    background-color: #E6E6E6;
+    border: none;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.circle-button:focus {
+    outline: none;
+}
+
+.circle-button:hover {
+    background-color: #CCC;
+}
+  
+.drug-count {
+    color: #3F3F3F;
+    font-size: 13px;
+    font-weight: bold;
+}

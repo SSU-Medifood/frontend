@@ -1,0 +1,37 @@
+.meal-card-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.meal-card {
+    max-width: 100px;
+    border-radius: 10px;
+    box-shadow: 6px 6px 10px rgba(0,0,0,0.15);
+    background: #FFFDF3;
+    text-align: center;
+    line-height: 1;
+}
+  
+.meal-time {
+    color: black;
+    font-size: 10px;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+  
+.meal-image {
+    width: 100%;
+    aspect-ratio: 1/1;
+    border-radius: 10px 10px 0 0;
+    object-fit: cover;
+}
+  
+.meal-name {
+    color: black;
+    font-size: 9px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}

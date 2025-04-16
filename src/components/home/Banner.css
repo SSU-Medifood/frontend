@@ -1,0 +1,59 @@
+/* 배너 전체 */
+.banner-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    flex-shrink: 0
+}
+
+/* 슬라이드 전체 */
+.slider-wrapper {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+/* 배너 각각 */
+.slider-banner {
+    flex-shrink: 0;
+    width: 100%;
+    object-fit: cover;
+    display: block;
+}
+  
+/* 이전/다음 버튼 */
+.banner-prev,
+.banner-next {
+    all: unset;
+    background-color: transparent !important;
+    
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.banner-prev:focus,
+.banner-next:focus {
+  outline: none;
+}
+  
+/* 이전 버튼 여백 */
+.banner-prev {
+    left: 10px;
+}
+  
+/* 다음 버튼 여백 */
+.banner-next {
+    right: 10px;
+}
+
+/* 이전/다음 버튼 크기 */
+.banner-prev img,
+.banner-next img {
+    width: 22px;
+    height: auto;
+}

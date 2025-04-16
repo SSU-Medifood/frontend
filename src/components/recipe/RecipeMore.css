@@ -1,0 +1,84 @@
+.more-title {
+    color: black;
+    font-size: 14px;
+    font-weight: bold;
+
+    /* 위 왼 아래 */
+    margin: 20px 25px 10px;
+}
+
+.recipe-more-container {
+    width: 100%;
+    display: flex;
+    position: relative; /* 화살표 위치 */
+}
+
+.more-cards-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center; 
+
+    gap: 10px; /* 카드 간격 */
+    margin-bottom: 120px;
+}
+
+.more-next {
+    background-color: transparent !important;
+    border: none;
+
+    position: absolute;
+    top: 20%;
+    transform: translateY(-20%);
+    cursor: pointer;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;    
+}
+
+.more-next:focus {
+  outline: none;
+}
+  
+.more-next.left {
+    left: -2%;
+}
+  
+.more-next.right {
+    right: -2%;
+}
+
+.more-next img {
+    width: 20px;
+    height: 20px;
+}
+
+/* 여기서부터 RecipeCard.jsx css style */
+
+.more-card-wrapper {
+    display: flex;
+    cursor: pointer;
+}
+
+.more-card {
+    max-width: 100px;
+    border-radius: 10px;
+    box-shadow: 6px 6px 10px rgba(0,0,0,0.15);
+    background: #FFFDF3;
+    text-align: center;
+    line-height: 1;
+}
+
+.more-name {
+    color: black;
+    font-size: 9px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.more-image {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 10px 10px 0 0;
+    object-fit: cover;
+}
