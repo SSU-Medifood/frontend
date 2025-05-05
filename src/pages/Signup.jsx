@@ -5,6 +5,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import logo from '/images/logo/logo-black.svg'
 import check from '/images/signup/check.svg'
+import { useCheckEmail } from '../hooks/useCheckEmail'
 
 function Signup() {
     const navigate = useNavigate()
@@ -14,11 +15,33 @@ function Signup() {
     const [email, setEmail] = useState("")
     const [showPWFields, setShowPWFields] = useState(false)
 
+    const { mutate: checkEmail, isLoading } = useCheckEmail()
+    const [emailErr, setEmailErr] = useState("")
+
     const handleCheckEmail = (e) => {
         e.preventDefault();
-        if (email.trim() === "") return;
-        setIsChecked(true);
-        setShowPWFields(true);
+        setEmailErr(""); // 기존 에러 지우기
+
+        if (!email.trim()) {
+            setEmailErr("이메일을 입력해주세요.");
+            return;
+        }
+
+        checkEmail(email, {
+            onSuccess: (available) => {
+              if (available) {
+                setIsChecked(true);
+                setShowPWFields(true);
+                console.log("✅ 연결 성공: 응답 값:", available);
+              } else {
+                setEmailErr("이미 가입된 이메일입니다.");
+              }
+            },
+            onError: (error) => {
+              setEmailErr("서버 오류가 발생했습니다.");
+              console.error("❌ 연결 실패: 서버가 죽었거나 주소가 틀림", error);
+            }
+        });
     }
 
     /* 비밀번호 보기, 확인 */
@@ -27,14 +50,14 @@ function Signup() {
 
     const [PW, setPW] = useState("")
     const [confirmPW, setConfirmPW] = useState("")
-    const [ErrMsg, setErrMsg] = useState("")
+    const [PWErr, setPWErr] = useState("")
 
     const handlePWChange = (e) => { setPW(e.target.value); }
 
     const handleConfirmPWChange = (e) => {
         setConfirmPW(e.target.value);
-        if (e.target.value !== PW) { setErrMsg("비밀번호가 일치하지 않습니다."); }
-        else { setErrMsg("");}
+        if (e.target.value !== PW) { setPWErr("비밀번호가 일치하지 않습니다."); }
+        else { setPWErr("");}
     }
 
     return (
@@ -60,7 +83,7 @@ function Signup() {
                     </div>
 
                     <div className="shared-wrapper">
-                        <p className="error-text">사용중인 이메일입니다.</p>
+                        <p className="error-text">{emailErr ? emailErr : ""}</p>
                         <button type="submit" className="valid-button">중복확인</button>
                     </div>
                 </form>
@@ -111,7 +134,7 @@ function Signup() {
                         />
                     </div>
 
-                    {ErrMsg && <p className="error-text">{ErrMsg}</p>}
+                    {PWErr && <p className="error-text">{PWErr}</p>}
 
                     <button className="login-button" onClick={() => navigate('/health-information1')}>가입하기</button>
                 </form>
