@@ -27,6 +27,11 @@ function TermsAgreement({ onAgree }) {
         const requiredChecked = updatedTerms
             .filter(term => term.required)
             .every(term => term.checked);
+        
+        // 마케팅 동의 여부 저장
+        const marketingTerm = updatedTerms.find(term => term.id === 4);
+        localStorage.setItem("marketing", marketingTerm.checked ? "true" : "false");
+        
         setAgreeAll(requiredChecked && updatedTerms.every(term => term.checked));
 
         onAgree(requiredChecked);
@@ -36,7 +41,19 @@ function TermsAgreement({ onAgree }) {
     const handleAgreeAll = () => {
         const newAgreeAll = !agreeAll;
         setAgreeAll(newAgreeAll);
-        setTerms(terms.map(term => ({ ...term, checked: newAgreeAll })));
+
+        // 체크 상태 변경
+        const updatedTerms = terms.map((term) => ({
+            ...term,
+            checked: newAgreeAll,
+        }));
+        setTerms(updatedTerms);
+
+        // 마케팅 동의 여부 저장
+        const marketingTerm = updatedTerms.find(term => term.id === 4);
+        localStorage.setItem("marketing", marketingTerm.checked ? "true" : "false");
+
+
         onAgree(newAgreeAll);
     }
 

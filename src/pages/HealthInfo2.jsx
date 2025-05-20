@@ -15,6 +15,19 @@ function HealthInfo2() {
 
     const isValid = gender && height && weight && smoking && drinking
 
+    // 다음 버튼 누를 때 로컬에 저장
+    const handleNext = () => {
+        if (isValid) {
+            localStorage.setItem("userSex", gender);
+            localStorage.setItem("height", parseFloat(height));  // float로 저장
+            localStorage.setItem("weight", parseFloat(weight));  // float로 저장
+            localStorage.setItem("userSmoke", smoking);
+            localStorage.setItem("userDrink", drinking);
+
+            navigate('/health-information3');
+        }
+    };
+
     return (
         <div className="shared-container">
             <div className="shared-header">
@@ -31,16 +44,16 @@ function HealthInfo2() {
                 <label className="input-label">성별</label>
                 <div className="button-group">
                     <button 
-                        className={gender === "여자" ? "selected" : ""} 
-                        onClick={(e) => { e.preventDefault(); setGender("여자"); }}
+                        className={gender === "여성" ? "selected" : ""} 
+                        onClick={(e) => { e.preventDefault(); setGender("여성"); }}
                     >
-                        여자
+                        여성
                     </button>
                     <button 
-                        className={gender === "남자" ? "selected" : ""} 
-                        onClick={(e) => { e.preventDefault(); setGender("남자"); }}
+                        className={gender === "남성" ? "selected" : ""} 
+                        onClick={(e) => { e.preventDefault(); setGender("남성"); }}
                     >
-                        남자
+                        남성
                     </button>
                 </div>
 
@@ -65,10 +78,10 @@ function HealthInfo2() {
                 <label className="input-label">흡연 여부</label>
                 <div className="button-group">
                     <button 
-                        className={smoking === "아니오" ? "selected" : ""} 
-                        onClick={(e) => { e.preventDefault(); setSmoking("아니오"); }}
+                        className={smoking === "아니요" ? "selected" : ""} 
+                        onClick={(e) => { e.preventDefault(); setSmoking("아니요"); }}
                     >
-                        아니오
+                        아니요
                     </button>
                     <button 
                         className={smoking === "예" ? "selected" : ""} 
@@ -87,28 +100,28 @@ function HealthInfo2() {
                 <label className="input-label">음주 횟수 (일주일)</label>
                 <div className="button-group">
                     <button 
-                        className={drinking === "0~1일" ? "selected" : ""} 
-                        onClick={(e) => { e.preventDefault(); setDrinking("0~1일"); }}
+                        className={drinking === "0~1회" ? "selected" : ""} 
+                        onClick={(e) => { e.preventDefault(); setDrinking("0~1회"); }}
                     >
-                        0~1일
+                        0~1회
                     </button>
                     <button 
-                        className={drinking === "1~2일" ? "selected" : ""} 
-                        onClick={(e) => { e.preventDefault(); setDrinking("1~2일"); }}
+                        className={drinking === "2~3회" ? "selected" : ""} 
+                        onClick={(e) => { e.preventDefault(); setDrinking("2~3회"); }}
                     >
-                        1~2일
+                        2~3회
                     </button>
                     <button 
-                        className={drinking === "3~4일" ? "selected" : ""} 
-                        onClick={(e) => { e.preventDefault(); setDrinking("3~4일"); }}
+                        className={drinking === "4~5회" ? "selected" : ""} 
+                        onClick={(e) => { e.preventDefault(); setDrinking("4~5회"); }}
                     >
-                        3~4일
+                        4~5회
                     </button>
                     <button 
-                        className={drinking === "5~7일" ? "selected" : ""} 
-                        onClick={(e) => { e.preventDefault(); setDrinking("5~7일"); }}
+                        className={drinking === "6~7회" ? "selected" : ""} 
+                        onClick={(e) => { e.preventDefault(); setDrinking("6~7회"); }}
                     >
-                        5~7일
+                        6~7회
                     </button>
                 </div>
             </form>
@@ -116,7 +129,7 @@ function HealthInfo2() {
             <button 
                 className={`next-step-button ${isValid ? "" : "disabled"}`} 
                 disabled={!isValid} 
-                onClick={() => navigate('/health-information3')}
+                onClick={handleNext}
             >
                 다음
             </button>
