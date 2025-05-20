@@ -45,12 +45,31 @@
     pointer-events: none;
 }
 
-.search-box {
-    width: 90%;
-    padding: 13px;
+/* 검색 버튼 style */
+.selected-items {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.item-chip {
+    padding: 0px 10px 0px 15px;
+    height: 30px;
+    border-radius: 20px;
+    background-color: #E6E6E6;
     font-size: 13px;
-    border: 1px solid #D8DADC;
-    border-radius: 8px;
-    background-color: #FFFFFF;
-    color: #999999;
+    cursor: pointer;
+
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.delete-icon {
+    margin-bottom: 4px;
+    width: 17px !important;
+    height: 17px !important;
+    margin-left: 6px;
+    cursor: pointer;
 }

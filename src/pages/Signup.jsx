@@ -32,14 +32,17 @@ function Signup() {
               if (available) {
                 setIsChecked(true);
                 setShowPWFields(true);
-                console.log("✅ 연결 성공: 응답 값:", available);
+                // console.log("✅ 연결 성공: 응답 값:", available);
+
+                // 로컬 스토리지에 이메일 저장
+                localStorage.setItem("email", email);
               } else {
                 setEmailErr("이미 가입된 이메일입니다.");
               }
             },
             onError: (error) => {
               setEmailErr("서버 오류가 발생했습니다.");
-              console.error("❌ 연결 실패: 서버가 죽었거나 주소가 틀림", error);
+              // console.error("❌ 연결 실패: 서버가 죽었거나 주소가 틀림", error);
             }
         });
     }
@@ -52,7 +55,13 @@ function Signup() {
     const [confirmPW, setConfirmPW] = useState("")
     const [PWErr, setPWErr] = useState("")
 
-    const handlePWChange = (e) => { setPW(e.target.value); }
+    const handlePWChange = (e) => { 
+        const newPW = e.target.value;
+        setPW(newPW); 
+    
+        // 로컬 스토리지에 비밀번호 저장
+        localStorage.setItem("password", newPW);
+    }
 
     const handleConfirmPWChange = (e) => {
         setConfirmPW(e.target.value);

@@ -3,9 +3,11 @@ import '../styles/Login.css'
 import '../styles/HealthInfo.css'
 import { useEffect, useState } from "react"
 import { useNavigate } from 'react-router-dom'
+import { useUserHealthInfo } from '../hooks/useUserHealthInfo'
 
 function MyPageEdit1() {
     const navigate = useNavigate()
+    const { data: userInfo, isLoading, isError } = useUserHealthInfo()
 
     const [gender, setGender] = useState("")
     const [height, setHeight] = useState("")
@@ -13,24 +15,40 @@ function MyPageEdit1() {
     const [smoking, setSmoking] = useState("")
     const [drinking, setDrinking] = useState("")
 
+    // 사용자 건강 정보 API로 초기값만 반영
     useEffect(() => {
-        // API 요청 넣어줄 자리
-        const dummyUserData = {
-          gender: '여자',
-          height: 165.8,
-          weight: 50,
-          smoking: '예',
-          drinking: '1~2일',
-        };
-      
-        setGender(dummyUserData.gender);
-        setHeight(dummyUserData.height);
-        setWeight(dummyUserData.weight);
-        setSmoking(dummyUserData.smoking);
-        setDrinking(dummyUserData.drinking);
-    }, [])
+        if (userInfo) {
+            setGender(userInfo.userSex || "")
+            setHeight(userInfo.height?.toString() || "")
+            setWeight(userInfo.weight?.toString() || "")
+            setSmoking(userInfo.userSmoke || "")
+            setDrinking(userInfo.userDrink || "")
+        }
+    }, [userInfo])
 
     const isValid = gender && height && weight && smoking && drinking
+
+    // 다음 버튼 누를 때 로컬에 저장
+    const handleNext = () => {
+        if (isValid) {
+            localStorage.setItem("userSex", gender);
+            localStorage.setItem("height", parseFloat(height));  // float로 저장
+            localStorage.setItem("weight", parseFloat(weight));  // float로 저장
+            localStorage.setItem("userSmoke", smoking);
+            localStorage.setItem("userDrink", drinking);
+
+            navigate('/mypage/edit2');
+        }
+    };
+
+    if (isLoading) {
+        return <div>건강 정보를 불러오는 중입니다...</div>;
+    }
+
+    if (isError) {
+        return <div>건강 정보를 불러오지 못했습니다.</div>;
+    }
+
 
     return (
         <div className="shared-container">
@@ -48,16 +66,16 @@ function MyPageEdit1() {
                 <label className="input-label">성별</label>
                 <div className="button-group">
                     <button 
-                        className={gender === "여자" ? "selected" : ""} 
-                        onClick={(e) => { e.preventDefault(); setGender("여자"); }}
+                        className={gender === "여성" ? "selected" : ""} 
+                        onClick={(e) => { e.preventDefault(); setGender("여성"); }}
                     >
-                        여자
+                        여성
                     </button>
                     <button 
-                        className={gender === "남자" ? "selected" : ""} 
-                        onClick={(e) => { e.preventDefault(); setGender("남자"); }}
+                        className={gender === "남성" ? "selected" : ""} 
+                        onClick={(e) => { e.preventDefault(); setGender("남성"); }}
                     >
-                        남자
+                        남성
                     </button>
                 </div>
 
@@ -82,10 +100,10 @@ function MyPageEdit1() {
                 <label className="input-label">흡연 여부</label>
                 <div className="button-group">
                     <button 
-                        className={smoking === "아니오" ? "selected" : ""} 
-                        onClick={(e) => { e.preventDefault(); setSmoking("아니오"); }}
+                        className={smoking === "아니요" ? "selected" : ""} 
+                        onClick={(e) => { e.preventDefault(); setSmoking("아니요"); }}
                     >
-                        아니오
+                        아니요
                     </button>
                     <button 
                         className={smoking === "예" ? "selected" : ""} 
@@ -104,28 +122,28 @@ function MyPageEdit1() {
                 <label className="input-label">음주 횟수 (일주일)</label>
                 <div className="button-group">
                     <button 
-                        className={drinking === "0~1일" ? "selected" : ""} 
-                        onClick={(e) => { e.preventDefault(); setDrinking("0~1일"); }}
+                        className={drinking === "0~1회" ? "selected" : ""} 
+                        onClick={(e) => { e.preventDefault(); setDrinking("0~1회"); }}
                     >
-                        0~1일
+                        0~1회
                     </button>
                     <button 
-                        className={drinking === "1~2일" ? "selected" : ""} 
-                        onClick={(e) => { e.preventDefault(); setDrinking("1~2일"); }}
+                        className={drinking === "2~3회" ? "selected" : ""} 
+                        onClick={(e) => { e.preventDefault(); setDrinking("2~3회"); }}
                     >
-                        1~2일
+                        2~3회
                     </button>
                     <button 
-                        className={drinking === "3~4일" ? "selected" : ""} 
-                        onClick={(e) => { e.preventDefault(); setDrinking("3~4일"); }}
+                        className={drinking === "4~5회" ? "selected" : ""} 
+                        onClick={(e) => { e.preventDefault(); setDrinking("4~5회"); }}
                     >
-                        3~4일
+                        4~5회
                     </button>
                     <button 
-                        className={drinking === "5~7일" ? "selected" : ""} 
-                        onClick={(e) => { e.preventDefault(); setDrinking("5~7일"); }}
+                        className={drinking === "6~7회" ? "selected" : ""} 
+                        onClick={(e) => { e.preventDefault(); setDrinking("6~7회"); }}
                     >
-                        5~7일
+                        6~7회
                     </button>
                 </div>
             </form>
@@ -133,7 +151,7 @@ function MyPageEdit1() {
             <button 
                 className={`next-step-button ${isValid ? "" : "disabled"}`} 
                 disabled={!isValid} 
-                onClick={() => navigate('/mypage/edit2')}
+                onClick={handleNext}
             >
                 다음
             </button>
