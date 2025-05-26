@@ -1,0 +1,146 @@
+.chatbot-container {
+    width: auto;
+    height: 100vh;
+    aspect-ratio: 9/20; /* 9:20 비율 (필요에 따라 조정) */
+
+    overflow-y: auto;
+    scrollbar-width: none;        /* Firefox */
+    -ms-overflow-style: none;     /* IE, Edge */
+
+    background-color: white;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.chatbot-header {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 15px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+/* MEFO */
+.chatbot-title {
+    color: black;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 0;
+}
+
+/* 대화창 영역 */
+.chat-window {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    overflow-y: auto;
+}
+
+/* 스크롤 스타일 */
+.chat-window::-webkit-scrollbar {
+  width: 6px; /* 바의 너비 */
+}
+
+.chat-window::-webkit-scrollbar-track {
+  background: transparent; /* 배경 제거 */
+}
+
+.chat-window::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2); /* 스크롤바 색 */
+  border-radius: 4px;
+}
+
+.chat-message {
+    margin: 0px 20px 13px 20px; /* 외부 여백 */
+    padding: 12px 15px; /* 내부 여백 */
+    border-radius: 20px;
+    max-width: 75%; /* 75%까지만 너비를 차지하고 줄바꿈 */
+    word-break: break-word;
+    color: black;
+    font-size: 12px;
+}
+
+.chat-message.bot {
+    background-color: #eaeaea;
+    align-self: flex-start;
+}
+
+.chat-message.user {
+    background-color: #85c088;
+    align-self: flex-end;
+    color: white;
+}
+
+.suggestion-box {
+    width: 60%;
+    margin: 5px 0 0 20px;
+    border-radius: 12px;
+    background: #FAFAFA;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+}
+
+.suggestion-item {
+    padding: 12px 16px;
+    border-top: 1px solid #efefef;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.suggestion-item:first-child {
+    border-top: none;
+}
+
+.suggestion-item:hover {
+    background-color: #efefef;
+}
+
+.chat-input {
+    width: 100%;
+    display: flex;
+    position: relative;
+    font-size: 12px;
+    margin-bottom: 75px;
+}
+
+.chat-input input {
+    width: 90%;
+    margin: auto;
+    padding: 18px 20px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+} 
+
+.chat-input button {
+    position: absolute;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    background-color: #85c088;
+    padding: 7px 10px;
+    border-radius: 50%;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+.chat-input input,
+.chat-input button {
+  outline: none;
+}

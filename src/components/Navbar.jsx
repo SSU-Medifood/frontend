@@ -12,6 +12,7 @@ function Navbar() {
 
   const handleHomeClick = () => { navigate("/home"); }
   const handleMedicationClick = () => { navigate("/medication"); }
+  const handleChatbotClick = () => { navigate("/mefo"); }
   const handleStorageClick = () => { navigate("/storage"); }
   const handleMyPageClick = () => { navigate("/mypage"); }
 
@@ -28,7 +29,7 @@ function Navbar() {
         <span className="nav-label">약 관리</span>
       </div>
 
-      <img src={navMEFO} alt="mefo" className="nav-mefo"/>
+      <img src={navMEFO} alt="mefo" className="nav-mefo" onClick={handleChatbotClick}/>
 
       <div className="nav-wrapper" style={{ top: '14%', left: '70%' }} onClick={handleStorageClick}>
         <img src={navStorage} alt="mefo" className="nav-storage"/>

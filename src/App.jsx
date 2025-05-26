@@ -23,6 +23,8 @@ import Medication from './pages/Medication'
 import MedicationRegister from './pages/MedicationRegister'
 import MedicationEdit from './pages/MedicationEdit'
 
+import Chatbot from './pages/Chatbot'
+
 import Storage from './pages/Storage'
 import StorageCreate from './pages/StorageCreate'
 import StorageDetail from './pages/StorageDetail'
@@ -62,6 +64,8 @@ function App() {
         <Route path="/medication" element={<Medication />} />
         <Route path="/medication/register" element={<MedicationRegister />} />
         <Route path="/medication/edit/:id" element={<MedicationEdit />} />
+
+        <Route path="/mefo" element={<Chatbot />} />
 
         <Route path="/storage" element={<Storage />} />
         <Route path="/storage/create" element={<StorageCreate />} />
