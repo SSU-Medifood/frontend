@@ -1,0 +1,116 @@
+.storage-container {
+    width: auto;
+    height: 100vh;
+    aspect-ratio: 9/20; /* 9:20 비율 (필요에 따라 조정) */
+
+    overflow-y: auto;
+    scrollbar-width: none;        
+    -ms-overflow-style: none;     
+
+    background-color: white;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.storage-header {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 15px;
+    box-sizing: border-box;
+    position: relative;
+
+    border-bottom: 1px solid #ECECEC;
+}
+
+/* 보관함 목록 버튼들 */
+.storage-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+
+    background: none;
+    border: none;
+    margin-bottom: 140px;
+}
+
+.storage-item {
+    all: unset;
+    width: 90%;
+
+    color: black;
+    font-size: 13px;
+    font-weight: bold;
+
+    background: none;
+    border: none;
+    border-bottom: 1.5px solid #ECECEC;
+    border-radius: 0;
+
+    padding: 17px 20px;
+    text-align: left;
+    cursor: pointer;
+
+    /* 아이콘 관련 style */
+    display: flex;
+    align-items: center;
+}
+
+.storage-item:focus {
+    outline: none;
+}
+
+.storage-item:hover {
+    border: none;
+    background-color: #f5f5f5;
+}
+
+.storage-next-icon {
+    position: absolute;
+    right: 18px;
+    width: 18px;
+    height: auto;
+}
+
+.storage-create-button {
+    position: fixed;
+    bottom: 75px;
+
+    left: 50%;
+    transform: translateX(calc((100vh * 9 / 20) / 2 - 62px));
+  
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+  
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: #96D59B; /* 연한 초록 */
+    border: none;
+    cursor: pointer;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+  
+.storage-create-button img {
+    width: 24px;
+    height: 24px;
+}
+
+.storage-create-button:focus {
+    outline: none;
+}

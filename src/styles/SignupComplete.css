@@ -1,0 +1,117 @@
+.signup-complete-container {
+    width: auto;
+    height: 100vh;
+    aspect-ratio: 9/20; /* 9:20 비율 (필요에 따라 조정) */
+
+    background-image: linear-gradient(to bottom, rgba(255,255,255,0.4), rgba(0,0,0,0.8)),
+                      url('/images/landing-bg.png');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.clipboard-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    max-width: 400px;
+}
+
+.clipboard-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin-bottom: 30px;
+}
+
+.clipboard-title {
+    color: black;
+    text-align: center;
+    font-size: 13px;
+    font-weight: bold;
+    position: absolute;
+    top: 12%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* 건강 정보 리스트 */
+.info-list {
+    position: absolute;
+    top: 22%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70%;
+    color: black;
+    text-align: left;
+    font-size: 12px;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+/* 리스트 p 태그 스타일 */
+.info-list p {
+    margin: 4px 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* 리스트 strong 태그 스타일일 */
+.info-list strong {
+    color: black;
+    min-width: 140px;
+}
+
+/* 사용자 건강 정보 */
+.user-info {
+    color: #4F4F4F;
+    text-align: left;
+    flex-grow: 1;
+}
+
+.signup-complete-start {
+    background: white;
+    color: black;
+    font-size: 1.0rem;
+    font-weight: bold;
+    padding: 10px 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    width: 65%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.signup-complete-start:hover {
+    background-color: #ccc;
+    color: black;
+    font-weight: bold;
+}
+
+.signup-complete-start:focus {
+    outline: none;
+}
+
+.signup-complete-logo {
+    width: 45px;
+    height: auto;
+}

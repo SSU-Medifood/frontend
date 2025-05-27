@@ -1,0 +1,60 @@
+.home-container {
+    width: auto;
+    height: 100vh;
+    aspect-ratio: 9/20; /* 9:20 비율 (필요에 따라 조정) */
+
+    overflow-y: auto;
+    scrollbar-width: none;        /* Firefox */
+    -ms-overflow-style: none;     /* IE, Edge */
+
+    background-color: white;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* MEFO 로고 */
+.home-logo {
+    position: absolute;
+    top: 17px;
+    left: 13px;
+    width: 60px;
+    height: auto;
+}
+
+.home-symbol {
+    width: 14px;
+    height: auto;
+    margin-right: 8px;
+}
+
+/* Greeting message */
+.home-greeting-wrapper {
+    width: 100%;
+    border-top: 1.5px solid #ECECEC;
+    margin-top: 50px;
+    padding-left: 13px;
+    display: flex;
+    align-items: center;
+}
+
+.home-greeting-text {
+    color: black;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.section-divider {
+    width: 86%;
+    height: 1.5px;
+    background-color: #ECECEC;
+    margin: 20px auto;
+    flex-shrink: 0
+}

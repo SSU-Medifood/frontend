@@ -1,0 +1,124 @@
+/* 자주 사용하는 CSS */
+
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.shared-container {
+    width: auto;
+    height: 100vh;
+    aspect-ratio: 9/20; /* 9:20 비율 (필요에 따라 조정) */
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.shared-header {
+    display: flex;
+    padding: 17px;
+}
+
+/* 뒤로가기 버튼 */
+.shared-back {
+    position: absolute;
+    left: 15px;
+    width: 20px;
+    height: auto;
+    cursor: pointer;
+}
+
+/* header title */
+.shared-title {
+    color: black;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 0;
+}
+
+/* 한 줄에 두 개의 요소 배치 */
+.shared-wrapper {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    min-height: 20px;
+}
+
+/* 에러 메시지 */
+.error-text {
+    margin: 0;
+    color: red;
+    font-size: 11px;
+    visibility: visible; /* hidden */
+}
+
+/* CSS만 수정해둔거라 api 도입하면서 상태 추가해야함 */
+.error-text.show {
+    visibility: visible;
+}
+
+/* 인증하기 & 재전송 버튼 */
+.verify-button,
+.resend-button {
+    background-color: black;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+  
+.verify-button:hover,
+.resend-button:hover {
+    background-color: #333;
+}
+
+.verify-button:focus,
+.resend-button:focus {
+    outline: none;
+}
+
+/* 다음, 비밀번호 변경 버튼 */
+.next-step-button {
+    position: absolute;
+    bottom: 50px;
+    width: 70%;
+
+    background-color: black;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.next-step-button:hover {
+    background-color: #333;
+}
+
+.next-step-button:disabled {
+    background-color: #CCCCCC;
+    cursor: not-allowed;
+}
+
+.next-step-button:focus {
+    outline: none;
+}

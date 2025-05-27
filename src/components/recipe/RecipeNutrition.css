@@ -1,0 +1,23 @@
+.nutrition-wrapper {
+    display: flex;
+    align-items: center;
+    margin: 15px auto 15px;
+}
+  
+.nutrition-info {
+    color: #6D6D6D;
+    font-size: 12px;
+
+    display: flex;
+    flex-direction: column;
+    margin: 0 20px 0;
+    gap: 6px;
+}
+  
+.color-box {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin-right: 8px;
+    border-radius: 3px;
+}

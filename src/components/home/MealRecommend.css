@@ -1,0 +1,25 @@
+.recommend-section {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 15px;
+    margin-top: 18px;
+}
+  
+.recommend-title {
+    color: black;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 0 13px;
+    margin-bottom: 15px;
+}
+
+.meal-cards {
+    max-width: 360px;
+    box-sizing: border-box;
+    padding: 0 8px;
+    margin: 0 auto;
+
+    display: flex; 
+    justify-content: space-between;
+    gap: 12px;
+}

@@ -1,0 +1,20 @@
+.recipe-info {
+    width: 65%;
+    display: flex;
+    justify-content: space-between;
+    margin: 10px auto 15px;
+}
+  
+.recipe-info-text {
+    color: #6D6D6D;
+    font-size: 12px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+  
+.recipe-info-icon {
+    font-size: 20px;
+}
