@@ -14,7 +14,7 @@ function Chatbot() {
 
     const [showSuggestions, setShowSuggestions] = useState(true)
     const suggestedQuestions = [
-        "당뇨에 무슨 음식이 좋을까?",
+        "당뇨에는 무슨 음식이 좋을까?",
         "생리통에 좋은 음식 알려줘",
         "부담스럽지 않은 야식 추천해줘"
     ]
