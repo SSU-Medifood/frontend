@@ -1,11 +1,29 @@
 import './StorageCreateMini.css'
 import './StorageSelectMini.css'
 import { useState } from 'react'
+import { useCreateStorage } from '../../hooks/useCreateStorage'
+import { useQueryClient } from '@tanstack/react-query'
 
-function StorageCreateMini({ onClose, onCreate }) {
-    const [storageName, setStorageName] = useState("")
+function StorageCreateMini({ onClose }) {
+    const [storageName, setStorageName] = useState('')
+    const createStorage = useCreateStorage()
+    const queryClient = useQueryClient()
 
-    const handleCreate = () => { onCreate(storageName); onClose(); }
+    const handleCreate = () => {
+        if (storageName.trim().length === 0) {
+            alert('보관함 이름은 최소 한 글자 이상 입력해주세요');
+            return;
+        }
+        createStorage.mutate(storageName, {
+            onSuccess: () => {
+                queryClient.invalidateQueries({ queryKey: ['storageList'] })
+                onClose()
+            },
+            onError: (err) => {
+                // console.error('보관함 생성 실패:', err)
+            }
+        })
+    }
     
     return (
         <div className="storage-create-modal-container" onClick={onClose}>

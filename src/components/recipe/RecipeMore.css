@@ -41,11 +41,11 @@
 }
   
 .more-next.left {
-    left: -2%;
+    left: 0px;
 }
   
 .more-next.right {
-    right: -2%;
+    right: 0px;
 }
 
 .more-next img {
@@ -61,7 +61,7 @@
 }
 
 .more-card {
-    max-width: 100px;
+    max-width: 95px;
     border-radius: 10px;
     box-shadow: 6px 6px 10px rgba(0,0,0,0.15);
     background: #FFFDF3;

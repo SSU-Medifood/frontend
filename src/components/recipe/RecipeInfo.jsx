@@ -1,12 +1,12 @@
 import './RecipeInfo.css'
 
-function RecipeInfo({ time, kcal, servings }) {
+function RecipeInfo({ type, kcal, servings }) {
 
     return (
         <div className="recipe-info">
             <div className="recipe-info-text">
-                <span className="recipe-info-icon">🕒</span>
-                <span>{time}</span>
+                <span className="recipe-info-icon">🍽️</span>
+                <span>{type}</span>
             </div>
             <div className="recipe-info-text">
                 <span className="recipe-info-icon">🔥</span>
