@@ -1,14 +1,26 @@
 import './RecipeHeader.css'
 import { useState } from 'react'
+import { useLikeRecipe } from '../../hooks/useLikeRecipe'
 
-function RecipeHeader({ title, onBack, onStorage }) {
-    const [isStored, setIsStored] = useState(false)
+function RecipeHeader({ title, onBack, onStorage, recipeId, initialLike }) {
+    const [isStored, setIsStored] = useState(initialLike)
+    const likeMutation = useLikeRecipe()
 
     const handleStorageClick = () => {
-        if (!isStored) { // 처음 클릭할 때만 모달 열어주기
-            if (onStorage) onStorage();
+        if (!isStored && onStorage) {
+            onStorage();
         }
-        setIsStored(prev => !prev);
+        likeMutation.mutate(
+            { id: recipeId, like: !isStored },
+            {
+                onSuccess: () => {
+                    setIsStored(prev => !prev);
+                },
+                onError: (err) => {
+                    // console.error("찜 처리 실패:", err);
+                }
+            }
+        );
     }
     
     return (

@@ -5,7 +5,7 @@ function MealCard({ time, name, image }) {
     const navigate = useNavigate()
 
     const handleClick = () => {
-        if (name === '매운 쇠고기 갈비찜') { navigate('/recipe/galbijjim'); }
+        if (name === '매운 쇠고기 갈비찜') { navigate('/recipe/2'); }
     }
 
     return (
