@@ -6,6 +6,9 @@ import { usePatchUserSettings } from '../hooks/usePatchUserSettings'
 import { useUserSettings } from '../hooks/useUserSettings'
 import { useDeleteUser } from '../hooks/useDeleteUser'
 
+import { requestPermissionAndGetToken } from '../notifications'
+import { sendFcmTokenToBackend, deleteFcmTokenFromBackend } from '../api/user'
+
 function Setting() {
     const navigate = useNavigate()
     const { data: userSettings, isLoading, isError } = useUserSettings()
@@ -24,13 +27,27 @@ function Setting() {
     }, [userSettings])
 
     // 사용자 설정 수정
-    const handleToggle = (type) => {
+    const handleToggle = async (type) => {
         const newSettings = {
             pushAlarm: type === 'push' ? !pushAlarm : pushAlarm,
             marketing: type === 'marketing' ? !marketing : marketing,
         };
         updateSettings(newSettings);
-        if (type === 'push') setPushAlarm(!pushAlarm);
+
+        if (type === 'push') {
+            const newValue = !pushAlarm
+            setPushAlarm(newValue)
+
+            if (newValue) {
+                const token = await requestPermissionAndGetToken()
+                if (token) {
+                    await sendFcmTokenToBackend(token)
+                }
+            } else {
+                await deleteFcmTokenFromBackend()
+            }
+        }
+
         if (type === 'marketing') setMarketing(!marketing);
     }
 
@@ -91,7 +108,11 @@ function Setting() {
             <div className="setting-footer">
                 <span className="footer-link" onClick={() => deleteUser()}>회원탈퇴</span>
                 <span className="footer-divider">|</span>
-                <span className="footer-link" onClick={() => { localStorage.removeItem('token'); navigate('/login'); }}>로그아웃</span>
+                <span className="footer-link" onClick={() => { 
+                    deleteFcmTokenFromBackend(); localStorage.removeItem('token'); navigate('/login'); 
+                }}>
+                    로그아웃
+                </span>
             </div>
         </div>
     )

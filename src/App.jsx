@@ -1,6 +1,12 @@
+import { useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+
+import { requestPermissionAndGetToken } from './notifications'
+import { sendFcmTokenToBackend } from './api/user'
+import { onMessage } from 'firebase/messaging'
+import { messaging } from './firebase'
 
 import Landing from './pages/Landing'
 import Login from './pages/Login'
@@ -40,6 +46,28 @@ import PrivacyPolicy from './pages/PrivacyPolicy'
 const queryClient = new QueryClient()
 
 function App() {
+  
+  useEffect(() => {
+    const accessToken = localStorage.getItem('token'); // 로그인 여부 확인하는 로직
+    if (!accessToken) return;
+
+    requestPermissionAndGetToken().then(token => {
+      if (token) {
+        // console.log('FCM 토큰:', token);
+        sendFcmTokenToBackend(token);
+      }
+    });
+
+    // 포그라운드 메시지 수신 처리
+    onMessage(messaging, (payload) => {
+      // console.log('포그라운드 푸시:', payload);
+      const { title, body } = payload.notification;
+
+      if (Notification.permission === 'granted') {
+        new Notification(title, { body });
+      }
+    });
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
