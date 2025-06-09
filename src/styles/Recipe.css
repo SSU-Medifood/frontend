@@ -1,6 +1,7 @@
 .recipe-container {
     width: auto;
     height: 100vh;
+    height: 100dvh;
     aspect-ratio: 9/20; /* 9:20 비율 (필요에 따라 조정) */
 
     overflow-y: auto;
