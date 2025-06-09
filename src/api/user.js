@@ -61,3 +61,23 @@ export const deleteUser = async () => {
         throw new Error('회원 탈퇴에 실패했습니다.');
     }
 };
+
+// FCM 토큰 백엔드 전송
+export const sendFcmTokenToBackend = async (fcmToken) => {
+    try {
+        const response = await api.post('/token/save', { fcmtoken: fcmToken });
+        return response.data;
+    } catch (error) {
+        throw new Error('FCM 토큰 저장에 실패했습니다.');
+    }
+};
+
+// FCM 토큰 삭제 요청
+export const deleteFcmTokenFromBackend = async () => {
+    try {
+        const response = await api.delete('/token/delete');
+        return response.data;
+    } catch (error) {
+        throw new Error('FCM 토큰 삭제 요청에 실패했습니다.');
+    }
+};
