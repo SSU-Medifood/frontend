@@ -51,8 +51,8 @@ function Setting() {
         if (type === 'marketing') setMarketing(!marketing);
     }
 
-    if (isLoading) return <div>불러오는 중...</div>
-    if (isError) return <div>설정 정보를 불러올 수 없습니다.</div>
+    if (isLoading) return
+    if (isError) return
 
     return (
         <div className="setting-container">
@@ -106,10 +106,29 @@ function Setting() {
             </div>
 
             <div className="setting-footer">
-                <span className="footer-link" onClick={() => deleteUser()}>회원탈퇴</span>
+                <span 
+                    className="footer-link" 
+                    onClick={() => {
+                        const confirmed = window.confirm('정말로 회원 탈퇴하시겠습니까?\n탈퇴 시 모든 정보가 삭제됩니다.');
+                        if (confirmed) {
+                            deleteUser();
+                        }
+                    }}
+                >
+                    회원탈퇴
+                </span>
                 <span className="footer-divider">|</span>
-                <span className="footer-link" onClick={() => { 
-                    deleteFcmTokenFromBackend(); localStorage.removeItem('token'); navigate('/login'); 
+                <span 
+                    className="footer-link" 
+                    onClick={async () => { 
+                        try {
+                            await deleteFcmTokenFromBackend(); 
+                        } catch (err) {
+                            console.error('FCM 토큰 삭제 실패:', err);
+                        } finally {
+                            localStorage.removeItem('token'); 
+                            navigate('/login'); 
+                        }
                 }}>
                     로그아웃
                 </span>

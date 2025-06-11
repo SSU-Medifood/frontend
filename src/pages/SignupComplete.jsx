@@ -1,37 +1,59 @@
 import '../styles/shared.css'
 import '../styles/SignupComplete.css'
 import { useNavigate } from 'react-router-dom'
-import { useEffect, useRef } from 'react'
-import { useLoginUser } from '../hooks/useLoginUser'
-import { useUserHealthInfo } from '../hooks/useUserHealthInfo'
+import { useEffect, useRef, useState } from 'react'
+// import { useLoginUser } from '../hooks/useLoginUser'
+// import { useUserHealthInfo } from '../hooks/useUserHealthInfo'
+import { loginUser } from '../api/auth'
+import { getUserHealthInfo } from '../api/user'
 
 function SignupComplete() {
     const navigate = useNavigate()
-    const loginUser = useLoginUser()
     const isInitialRender = useRef(true)
-    const { data: userInfo, isLoading, isError } = useUserHealthInfo()
+    const [userInfo, setUserInfo] = useState(null)
+    const [loading, setLoading] = useState(true)
+    const [error, setError] = useState(null)
 
-    // 페이지가 렌더링될 때, 토큰이 로컬에 저장됨
     useEffect(() => {
         if (!isInitialRender.current) return;
-    
+
         const email = localStorage.getItem('email');
         const password = localStorage.getItem('password');
-    
-        if (email && password) {
-            loginUser.mutate({ email, password });
+
+        if (!email || !password) {
+            setError('이메일 또는 비밀번호가 없습니다.');
+            setLoading(false);
+            return;
         }
-    
-        isInitialRender.current = false; // 첫 렌더링 이후에는 요청을 더 이상 보내지 않음
-    }, [loginUser])
 
-    if (isLoading) {
-        return <div>건강 정보를 불러오는 중입니다...</div>;
-    }
+        // 로그인 후 → 유저 정보 요청
+        const fetchUserData = async () => {
+            try {
+                const loginResult = await loginUser(email, password);
+                const token = loginResult.token?.replace('Bearer ', '');
 
-    if (isError) {
-        return <div>건강 정보를 불러오지 못했습니다.</div>;
-    }
+                if (!token) {
+                    throw new Error('토큰이 없습니다.');
+                }
+
+                localStorage.setItem('token', token);
+
+                const userData = await getUserHealthInfo();
+                setUserInfo(userData);
+            } catch (err) {
+                console.error(err);
+                setError('유저 정보를 불러오는 데 실패했습니다.');
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchUserData();
+        isInitialRender.current = false;
+    }, []);
+
+    if (loading) return
+    if (error) return
 
     return (
         <div className="signup-complete-container">

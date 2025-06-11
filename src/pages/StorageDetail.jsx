@@ -48,7 +48,7 @@ function StorageDetail() {
                 <section className="menu-grid-section">
                     <div className="menu-grid">
                         {storedRecipes.map((item) => (
-                            <MenuCard key={item.recipeId} name={item.name} image={item.imageSmall} />
+                            <MenuCard key={item.recipeId} name={item.name} image={item.imageSmall} onClick={() => navigate(`/recipe/${item.recipeId}`)} />
                         ))}
                     </div>
                 </section>

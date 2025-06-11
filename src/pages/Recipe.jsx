@@ -26,8 +26,8 @@ function Recipe() {
     const handleStorageOpen = () => setIsStorageOpen(true)
     const handleStorageClose = () => setIsStorageOpen(false)
 
-    if (isLoading) return <p>불러오는 중...</p>
-    if (isError) return <p>레시피를 불러오는 데 실패했습니다.</p>
+    if (isLoading) return
+    if (isError) return
 
     const {
         menu,

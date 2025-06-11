@@ -19,7 +19,7 @@ function MedicationEdit() {
     const [drugDose, setDrugDose] = useState('')
     const [drugTime, setDrugTime] = useState('')
     const [drugAlarm, setDrugAlarm] = useState('')
-    const [drugCount, setDrugCount] = useState(0)
+    const [drugCount, setDrugCount] = useState(1)
     const [alarmTimes, setAlarmTimes] = useState([])
 
     // 수정할 데이터 불러오기
@@ -63,7 +63,7 @@ function MedicationEdit() {
         )
     }
 
-    if (isLoading) return <div>불러오는 중...</div>
+    if (isLoading) return
     
     return (
         <>
@@ -171,21 +171,23 @@ function MedicationEdit() {
                 <div className="register-form-field">
                     <label className="register-form-label">일일 투여 횟수</label>
                     <div className="frequency-control">
-                        <button className="circle-button" onClick={() => setDrugCount(Math.max(0, drugCount - 1))}>−</button>
+                        <button className="circle-button" onClick={() => setDrugCount(Math.max(1, drugCount - 1))}>−</button>
                         <span className="drug-count">{drugCount} 회</span>
                         <button className="circle-button" onClick={() => setDrugCount(drugCount + 1)}>＋</button>
                     </div>
                 </div>
 
-                <div className="register-form-field">
-                    <label className="register-form-label">알람 시간</label>
-                    <AlarmSelect
-                        drugCount={drugCount}
-                        alarmTimes={alarmTimes}
-                        setAlarmTimes={setAlarmTimes}
-                        setDrugCount={setDrugCount}
-                    />
-                </div>
+                {drugAlarm === '네' && (
+                    <div className="register-form-field">
+                        <label className="register-form-label">알람 시간</label>
+                        <AlarmSelect
+                            drugCount={drugCount}
+                            alarmTimes={alarmTimes}
+                            setAlarmTimes={setAlarmTimes}
+                            setDrugCount={setDrugCount}
+                        />
+                    </div>
+                )}
             </div>
 
             <Navbar />

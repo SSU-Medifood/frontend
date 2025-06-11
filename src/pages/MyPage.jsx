@@ -19,7 +19,7 @@ function MyPage() {
     const handleSetting = () => { navigate(`/mypage/setting`); }
     const handleEdit = () => { navigate(`/mypage/edit1`); }
 
-    if (isLoading) return <div>정보를 불러오는 중입니다...</div>;
+    if (isLoading) return
     if (isError || !userInfo) return <div>사용자 정보를 불러올 수 없습니다.</div>;
 
     return (
