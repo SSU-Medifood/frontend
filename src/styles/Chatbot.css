@@ -79,6 +79,12 @@
     align-self: flex-start;
 }
 
+.chat-message.bot p {
+    margin: 2px;
+    padding: 0;
+    line-height: 1.4;
+}
+
 .chat-message.user {
     background-color: #85c088;
     align-self: flex-end;

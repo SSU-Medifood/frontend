@@ -1,7 +1,10 @@
+import ReactMarkdown from 'react-markdown'
 import '../styles/shared.css'
 import '../styles/Chatbot.css'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useSuggestedQuestions } from '../hooks/useSuggestedQuestions'
+import { streamChatResponse } from '../api/chatStream'
 import Navbar from '../components/Navbar'
 
 function Chatbot() {
@@ -13,36 +16,64 @@ function Chatbot() {
     ])
 
     const [showSuggestions, setShowSuggestions] = useState(true)
-    const suggestedQuestions = [
-        "당뇨에는 무슨 음식이 좋을까?",
-        "생리통에 좋은 음식 알려줘",
-        "부담스럽지 않은 야식 추천해줘"
-    ]
+    const { data: suggestedQuestions = [], isLoading, isError } = useSuggestedQuestions()
 
     // 사용자가 입력한 텍스트의 상태
     const [input, setInput] = useState('')
+    
+    // 스트리밍 중 상태
+    const [isStreaming, setIsStreaming] = useState(false)
 
     // 추천 질문 클릭 핸들러
     const handleSuggestionClick = (question) => {
-        const userMessage = { sender: 'user', text: question };
-        const botReply = { sender: 'bot', text: `(${question})에 대한 임시 응답입니다.` };
+        if (isStreaming) return
 
-        setMessages((prev) => [...prev, userMessage, botReply]);
-        setShowSuggestions(false);
+        const userMessage = { sender: 'user', text: question }
+        setMessages(prev => [...prev, userMessage])
+        setShowSuggestions(false)
+        setInput('')
+
+        handleStreamResponse(question)
+    }
+
+    // 스트리밍 챗 응답 처리 함수
+    const handleStreamResponse = async (question) => {
+        setIsStreaming(true)
+
+        let botMessage = { sender: 'bot', text: '' }
+        setMessages(prev => [...prev, botMessage]) // 빈 봇 메시지 추가
+
+        const onChunk = (text) => {
+            botMessage.text += text
+            setMessages(prev => {
+                const newMessages = [...prev]
+                newMessages[newMessages.length - 1] = botMessage
+                return newMessages
+            })
+        }
+
+        try {
+            await streamChatResponse(question, onChunk)
+        } catch (e) {
+            onChunk('\n[오류 발생]')
+        }
+
+        setIsStreaming(false)
     }
 
     // 전송 버튼 또는 Enter 핸들러
     const handleSend = () => {
-        if (!input.trim()) return;
+        if (!input.trim() || isStreaming) return
 
-        const userMessage = { sender: 'user', text: input };
-        const botReply = { sender: 'bot', text: `사용자 입력: ${input}` }; 
+        const userMessage = { sender: 'user', text: input }
+        setMessages(prev => [...prev, userMessage])
+        setShowSuggestions(false)
 
-        setMessages((prev) => [...prev, userMessage, botReply]);
-        setInput('');
-        setShowSuggestions(false);
+        handleStreamResponse(input)
+        setInput('')
     }
-    const handleKeyDown = (e) => { if (e.key === 'Enter') handleSend(); }
+
+    const handleKeyDown = (e) => { if (e.key === 'Enter') handleSend() }
 
     return (
         <>
@@ -61,19 +92,23 @@ function Chatbot() {
                 <div className="chat-window">
                     {messages.map((msg, idx) => (
                         <div key={idx} className={`chat-message ${msg.sender}`}>
-                            {msg.text}
+                            {msg.sender === 'bot' ? (
+                                <ReactMarkdown>{msg.text}</ReactMarkdown>
+                            ) : (
+                                msg.text
+                            )}
                         </div>
                     ))}
                     {/* 추천 질문 박스 */}
                     {showSuggestions && (
                         <div className="suggestion-box">
-                            {suggestedQuestions.map((q, idx) => (
+                            {suggestedQuestions.map((q) => (
                                 <div
-                                    key={idx}
+                                    key={q.id}
                                     className="suggestion-item"
-                                    onClick={() => handleSuggestionClick(q)}
+                                    onClick={() => handleSuggestionClick(q.question)}
                                 >
-                                    {q}
+                                    {q.question}
                                 </div>
                             ))}
                         </div>
@@ -88,8 +123,9 @@ function Chatbot() {
                         onChange={(e) => setInput(e.target.value)}
                         onKeyDown={handleKeyDown}
                         placeholder="무엇이든 물어보세요"
+                        disabled={isStreaming}
                     />
-                    <button onClick={handleSend}>⬆</button>
+                    <button onClick={handleSend} disabled={isStreaming}>⬆</button>
                 </div>
             </div>
             <Navbar />

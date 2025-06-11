@@ -8,11 +8,10 @@ function Storage() {
     const navigate = useNavigate()
     const { data: storageList, isLoading, isError } = useStorageList()
 
-    if (isLoading) return <p>불러오는 중...</p>
-    if (isError) return <p>보관함을 불러오는 데 실패했습니다.</p>
+    if (isLoading) return
+    if (isError) return
 
-    // 전체 보관함 따로 분리
-    const fullStorage = storageList.find((s) => s.name === '전체 보관함')
+    const fullStorage = { id: 'all', name: '전체 보관함' }
     const otherStorages = storageList.filter((s) => s.name !== '전체 보관함')
 
     return (
@@ -29,14 +28,12 @@ function Storage() {
                 </div>
 
                 <div className="storage-list">
-                    {fullStorage && (
-                        <button className="storage-item" onClick={() => navigate(`/storage/${fullStorage.id}`, {
-                            state: { name: fullStorage.name } 
-                        })}>
-                            🍴 {fullStorage.name}
-                            <img src="/images/recipe/more-next.svg" alt="이동" className="storage-next-icon" />
-                        </button>
-                    )}
+                    <button className="storage-item" onClick={() => navigate(`/storage/${fullStorage.id}`, {
+                        state: { name: fullStorage.name } 
+                    })}>
+                        🍴 {fullStorage.name}
+                        <img src="/images/recipe/more-next.svg" alt="이동" className="storage-next-icon" />
+                    </button>
 
                     {otherStorages.map((storage) => (
                         <button key={storage.id} className="storage-item" onClick={() => navigate(`/storage/${storage.id}`, { 

@@ -41,13 +41,8 @@ function MyPageEdit1() {
         }
     };
 
-    if (isLoading) {
-        return <div>건강 정보를 불러오는 중입니다...</div>;
-    }
-
-    if (isError) {
-        return <div>건강 정보를 불러오지 못했습니다.</div>;
-    }
+    if (isLoading) return
+    if (isError) return 
 
 
     return (
