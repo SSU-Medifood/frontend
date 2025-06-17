@@ -1,21 +1,14 @@
 import './RecipeMore.css'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import RecipeCard from './RecipeCard'
+import { useNavigate } from 'react-router-dom'
+import { useMoreRecipes } from '../../hooks/useMoreRecipes'
 
-function RecipeMore() {
+function RecipeMore({ recipeId }) {
+    const navigate = useNavigate()
+    
     const [page, setPage] = useState(0)
-
-    const moreRecipes = [
-        { name: '미역국', image: '/images/food/miyukguk.jpg' },
-        { name: '오므라이스', image: '/images/food/omelet.png' },
-        { name: '미역국', image: '/images/food/miyukguk.jpg' },
-        { name: '오므라이스', image: '/images/food/omelet.png' },
-        { name: '미역국', image: '/images/food/miyukguk.jpg' },
-        { name: '오므라이스', image: '/images/food/omelet.png' },
-        { name: '미역국', image: '/images/food/miyukguk.jpg' },
-        { name: '오므라이스', image: '/images/food/omelet.png' },
-        { name: '미역국', image: '/images/food/miyukguk.jpg' }
-    ]
+    const { data: moreRecipes = [], isLoading, isError } = useMoreRecipes(recipeId)
 
     const handleLeft = () => { 
         if (page > 0) { setPage(page - 1); } 
@@ -25,6 +18,8 @@ function RecipeMore() {
     }
 
     const sliceRecipes = moreRecipes.slice(page * 3, (page + 1) * 3)
+
+    if (isLoading || isError) return
 
     return (
         <>
@@ -37,8 +32,8 @@ function RecipeMore() {
                 </button>
 
                 <div className="more-cards-wrapper">
-                    {sliceRecipes.map((item, idx) => (
-                        <RecipeCard key={idx} name={item.name} image={item.image} />
+                    {sliceRecipes.map((item) => (
+                        <RecipeCard key={item.recipeId} name={item.name} image={item.imageSmall} onClick={() => navigate(`/recipe/${item.recipeId}`)} />
                     ))}
                 </div>
 
