@@ -44,10 +44,11 @@ function Chatbot() {
         setMessages(prev => [...prev, botMessage]) // 빈 봇 메시지 추가
 
         const onChunk = (text) => {
-            botMessage.text += text
+            const chunk = text.trim() === '' ? '\n' : text // 빈 text는 줄바꿈으로 간주
+            botMessage.text += chunk
             setMessages(prev => {
                 const newMessages = [...prev]
-                newMessages[newMessages.length - 1] = botMessage
+                newMessages[newMessages.length - 1] = { ...botMessage }
                 return newMessages
             })
         }

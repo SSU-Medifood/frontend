@@ -1,5 +1,6 @@
 import '../styles/shared.css'
 import '../styles/Home.css'
+import { useUserHealthInfo } from '../hooks/useUserHealthInfo'
 import logo from '/images/logo/logo.svg'
 import symbol from '/images/logo/logo-symbol.svg'
 import Banner from '../components/home/Banner'
@@ -9,6 +10,11 @@ import MenuGrid from '../components/home/MenuGrid'
 import Navbar from '../components/Navbar'
 
 function Home() {
+    const { data: userInfo, isLoading, isError } = useUserHealthInfo()
+
+    if (isLoading) return
+    if (isError || !userInfo) return
+
     return (
         <>
             <div className="home-container">
@@ -20,13 +26,13 @@ function Home() {
                 </div>
                 <Banner />
                 
-                <MealRecommend />
+                <MealRecommend name={userInfo.name} />
                 <div className="section-divider" />
 
-                <FoodSuggest />
+                <FoodSuggest name={userInfo.name} />
                 <div className="section-divider" />
 
-                <MenuGrid />
+                <MenuGrid name={userInfo.name} />
             </div>
 
             <Navbar />

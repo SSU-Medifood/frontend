@@ -17,8 +17,7 @@ import StorageSelectMini from '../components/storage/StorageSelectMini'
 
 function Recipe() {
     const navigate = useNavigate()
-    const id = 1
-    // const { id } = useParams() // URL 파라미터에서 id 가져오기
+    const { id } = useParams()
     const { data, isLoading, isError } = useRecipeDetail(id)
 
     /* 보관함 모달 제어 */
@@ -76,7 +75,7 @@ function Recipe() {
 
                 <RecipeStep steps={instructionResponses.map(s => s.description)} />
 
-                <RecipeMore />
+                <RecipeMore recipeId={id} />
             </div>
 
             {isStorageOpen && <StorageSelectMini onClose={handleStorageClose} recipeId={id} />}
