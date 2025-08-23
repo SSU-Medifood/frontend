@@ -1,12 +1,18 @@
 import { useQuery } from '@tanstack/react-query';
+import { useState, useEffect } from 'react'; 
 import { getUserSettings } from '../api/user';
 import { getOrCreateDeviceId } from '../utils/device'; // 기기 ID 유틸 불러오기
 
 export const useUserSettings = (opts = {}) => {
-    const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null
-    const isAuthed = !!token
+    const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+    const isAuthed = !!token;
+    const [deviceId, setDeviceId] = useState(null);
 
-    const deviceId = isAuthed ? getOrCreateDeviceId() : null
+    useEffect(() => {
+        if (!isAuthed) return;
+        const id = getOrCreateDeviceId();
+        setDeviceId(id);
+    }, [isAuthed]);
 
     return useQuery({
         queryKey: ['userSettings', deviceId],
