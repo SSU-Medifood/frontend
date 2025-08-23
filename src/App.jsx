@@ -53,8 +53,6 @@ function App() {
   const { mutateAsync: setPushAlarmServer } = usePatchPushAlarm()
 
   useEffect(() => {
-      const token = localStorage.getItem('token')
-      if (!token) return
       const id = getOrCreateDeviceId()
       if (id) console.log('[App] ensured deviceId:', id)
   }, [])
