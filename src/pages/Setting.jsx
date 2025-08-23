@@ -2,54 +2,73 @@ import '../styles/shared.css'
 import '../styles/Setting.css'
 import { useState, useEffect } from "react"
 import { useNavigate } from 'react-router-dom'
-import { usePatchUserSettings } from '../hooks/usePatchUserSettings'
+import { usePatchPushAlarm } from '../hooks/usePatchPushAlarm'
+import { usePatchMarketing } from '../hooks/usePatchMarketing'
 import { useUserSettings } from '../hooks/useUserSettings'
 import { useDeleteUser } from '../hooks/useDeleteUser'
 
 import { requestPermissionAndGetToken } from '../notifications'
-import { sendFcmTokenToBackend, deleteFcmTokenFromBackend } from '../api/user'
+import { useDeleteFcmToken } from '../hooks/useDeleteFcmToken'
+import { useDeleteAllFcmTokens } from '../hooks/useDeleteAllFcmTokens'
 
 function Setting() {
     const navigate = useNavigate()
     const { data: userSettings, isLoading, isError } = useUserSettings()
-    const { mutate: updateSettings } = usePatchUserSettings()
-    const { mutate: deleteUser } = useDeleteUser()
+    const { mutateAsync: setPushAlarmServer, isLoading: isPushMutating } = usePatchPushAlarm()
+    const { mutateAsync: setMarketingServer, isLoading: isMktMutating } = usePatchMarketing()
+    const { mutateAsync: deleteFcmToken } = useDeleteFcmToken()
+    const { mutateAsync: deleteAllFcmTokens } = useDeleteAllFcmTokens()
+    const { mutateAsync: deleteUser } = useDeleteUser()
     
     const [pushAlarm, setPushAlarm] = useState(false)
     const [marketing, setMarketing] = useState(false)
 
     // 사용자 설정 조회
     useEffect(() => {
-        if (userSettings) {
-            setPushAlarm(userSettings.pushAlarm)
-            setMarketing(userSettings.marketing)
-        }
+        if (!userSettings) return
+        setPushAlarm(prev => userSettings.pushAlarm ?? prev)
+        setMarketing(prev => userSettings.marketing ?? prev)
     }, [userSettings])
 
-    // 사용자 설정 수정
-    const handleToggle = async (type) => {
-        const newSettings = {
-            pushAlarm: type === 'push' ? !pushAlarm : pushAlarm,
-            marketing: type === 'marketing' ? !marketing : marketing,
-        };
-        updateSettings(newSettings);
+    // 사용자 푸시 설정 수정
+    const handlePushToggle = async (e) => {
+        const next = e.target.checked;
+        setPushAlarm(next);
 
-        if (type === 'push') {
-            const newValue = !pushAlarm
-            setPushAlarm(newValue)
-
-            if (newValue) {
+        try {
+            if (next) {
                 const token = await requestPermissionAndGetToken()
-                if (token) {
-                    await sendFcmTokenToBackend(token)
-                }
-            } else {
-                await deleteFcmTokenFromBackend()
-            }
-        }
 
-        if (type === 'marketing') setMarketing(!marketing);
+                if (!token) {
+                    setPushAlarm(false);
+                    alert('알림 권한이 허용되지 않았거나 토큰 발급에 실패했습니다.');
+                    return;
+                }
+
+                await setPushAlarmServer(token)
+            } else {
+                await setPushAlarmServer(null)
+            }
+        } catch (err) {
+            console.error('푸시 알림 설정 변경 실패:', err)
+            setPushAlarm((prev) => !prev)
+            alert('푸시 알림 설정을 변경하지 못했습니다. 잠시 후 다시 시도해주세요.')
+        }
     }
+
+    // 사용자 마케팅 설정 수정
+    const handleMarketingToggle = async (e) => {
+        const next = e.target.checked;
+        setMarketing(next);
+
+        try {
+            await setMarketingServer(next)
+        } catch (err) {
+            console.error('마케팅 동의 설정 변경 실패:', err)
+            setMarketing((prev) => !prev)
+            alert('마케팅 동의 설정을 변경하지 못했습니다. 잠시 후 다시 시도해주세요.')
+        }
+    };
 
     if (isLoading) return
     if (isError) return
@@ -72,7 +91,7 @@ function Setting() {
                     <p>흑백처방전에서 보내는 알림을 받을 수 있어요</p>
                 </div>
                 <label className="switch">
-                    <input type="checkbox" checked={pushAlarm} onChange={() => handleToggle('push')} />
+                    <input type="checkbox" checked={pushAlarm} disabled={isPushMutating} onChange={handlePushToggle} />
                     <span className="slider"></span>
                 </label>
             </div>
@@ -84,7 +103,7 @@ function Setting() {
                     <p>신규 서비스 및 혜택 정보를 받을 수 있어요</p>
                 </div>
                 <label className="switch">
-                    <input type="checkbox" checked={marketing} onChange={() => handleToggle('marketing')} />
+                    <input type="checkbox" checked={marketing} disabled={isMktMutating} onChange={handleMarketingToggle} />
                     <span className="slider"></span>
                 </label>
             </div>
@@ -108,11 +127,13 @@ function Setting() {
             <div className="setting-footer">
                 <span 
                     className="footer-link" 
-                    onClick={() => {
-                        const confirmed = window.confirm('정말로 회원 탈퇴하시겠습니까?\n탈퇴 시 모든 정보가 삭제됩니다.');
-                        if (confirmed) {
-                            deleteUser();
-                        }
+                    onClick={async () => {
+                        const confirmed = window.confirm('정말로 회원 탈퇴하시겠습니까?\n탈퇴 시 모든 정보가 삭제됩니다.')
+                        if (!confirmed) return
+                        try {
+                            await deleteAllFcmTokens()
+                        } catch { }
+                        await deleteUser()
                     }}
                 >
                     회원탈퇴
@@ -122,7 +143,7 @@ function Setting() {
                     className="footer-link" 
                     onClick={async () => { 
                         try {
-                            await deleteFcmTokenFromBackend(); 
+                            await deleteFcmToken()
                         } catch (err) {
                             console.error('FCM 토큰 삭제 실패:', err);
                         } finally {

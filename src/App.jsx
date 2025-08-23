@@ -4,9 +4,11 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 import { requestPermissionAndGetToken } from './notifications'
-import { sendFcmTokenToBackend } from './api/user'
-import { onMessage } from 'firebase/messaging'
+import { onMessage, isSupported } from 'firebase/messaging'
 import { messaging } from './firebase'
+
+import { useUserSettings } from './hooks/useUserSettings'
+import { usePatchPushAlarm } from './hooks/usePatchPushAlarm'
 
 import Landing from './pages/Landing'
 import Login from './pages/Login'
@@ -46,28 +48,39 @@ import PrivacyPolicy from './pages/PrivacyPolicy'
 const queryClient = new QueryClient()
 
 function App() {
-  
-  useEffect(() => {
-    const accessToken = localStorage.getItem('token'); // 로그인 여부 확인하는 로직
-    if (!accessToken) return;
+  const { data: userSettings } = useUserSettings()
+  const { mutateAsync: setPushAlarmServer } = usePatchPushAlarm()
 
-    requestPermissionAndGetToken().then(token => {
-      if (token) {
-        // console.log('FCM 토큰:', token);
-        sendFcmTokenToBackend(token);
-      }
-    });
+  useEffect(() => {
+    (async () => {
+      const supported = await isSupported().catch(() => false)
+      if (!supported || !messaging) return
 
     // 포그라운드 메시지 수신 처리
-    onMessage(messaging, (payload) => {
-      // console.log('포그라운드 푸시:', payload);
-      const { title, body } = payload.notification;
+      onMessage(messaging, (payload) => {
+        const { title, body } = payload?.notification ?? {}
+        if (!title) return
+        if (Notification.permission === 'granted') {
+          new Notification(title, { body })
+        }
+      })
+    })()
+  }, [])
 
-      if (Notification.permission === 'granted') {
-        new Notification(title, { body });
+  // 알림이 켜져 있다면 최신 토큰을 확보해 서버에 업서트
+  useEffect(() => {
+    (async () => {
+      if (!userSettings?.pushAlarm) return;
+      const token = await requestPermissionAndGetToken();
+      if (!token) return;
+      try {
+        await setPushAlarmServer(token); // 서버에 최신 토큰 저장(업서트)
+        console.log('[FCM] token synced from App:', token);
+      } catch (e) {
+        console.error('[FCM] token sync failed:', e);
       }
-    });
-  }, []);
+    })();
+  }, [userSettings, setPushAlarmServer]);
 
   return (
     <QueryClientProvider client={queryClient}>
