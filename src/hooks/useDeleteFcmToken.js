@@ -1,9 +1,8 @@
 import { useMutation } from '@tanstack/react-query';
 import { deleteFcmTokenFromBackend } from '../api/user';
-import { getOrCreateDeviceId } from '../utils/device';
 
 export const useDeleteFcmToken = () => {
-    const deviceId = getOrCreateDeviceId();
+    const deviceId = typeof window !== 'undefined' ? localStorage.getItem('mefo_device_id') : null;
 
     return useMutation({
         mutationFn: () => deleteFcmTokenFromBackend(deviceId),

@@ -1,13 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 import { getUserSettings } from '../api/user';
-import { getOrCreateDeviceId } from '../utils/device';
 
 export const useUserSettings = (opts = {}) => {
     
     const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
     const isAuthed = !!token;
-    const deviceId = getOrCreateDeviceId();
-    // const deviceId = typeof window !== 'undefined' ? localStorage.getItem('mefo_device_id') : null;
+    const deviceId = typeof window !== 'undefined' ? localStorage.getItem('mefo_device_id') : null;
 
     return useQuery({
         queryKey: ['userSettings', deviceId],
