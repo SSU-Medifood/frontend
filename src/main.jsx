@@ -6,17 +6,8 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools" // DevTools
 import './index.css'
 import App from './App.jsx'
 
-import { getOrCreateDeviceId } from './utils/device'
-
 // React Query Client 생성
 const queryClient = new QueryClient()
-
-try {
-  const id = getOrCreateDeviceId()
-  console.log('[index] ensured deviceId:', id)
-} catch (e) {
-  console.warn('[index] ensure deviceId failed:', e)
-}
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
