@@ -1,10 +1,9 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { patchPushAlarmDevice } from '../api/user';
-import { getOrCreateDeviceId } from '../utils/device';
 
 export const usePatchPushAlarm = () => {
     const qc = useQueryClient();
-    const deviceId = getOrCreateDeviceId();
+    const deviceId = typeof window !== 'undefined' ? localStorage.getItem('mefo_device_id') : null;
 
     return useMutation({
         mutationFn: (fcmToken) => patchPushAlarmDevice(deviceId, fcmToken),
