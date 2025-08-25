@@ -8,28 +8,6 @@
   </head>
   <body>
     <div id="root"></div>
-
-    <script>
-      (function () {
-        try {
-          const KEY = 'mefo_device_id';
-          let id = localStorage.getItem(KEY);
-          if (!id) {
-            id = (self.crypto?.randomUUID?.()
-              ?? `dev_${Date.now().toString(36)}_${Math.random().toString(36).slice(2)}`);
-            localStorage.setItem(KEY, id);
-            alert('[Device:index.html] NEW ' + id);
-          } else {
-            alert('[Device:index.html] EXISTING ' + id);
-          }
-          // 디버깅용 마커
-          self.__DEVICE_BOOT__ = true;
-        } catch (e) {
-          console.error('[Device:index.html] error', e.name, e.message);
-        }
-      })();
-    </script>
-    
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
