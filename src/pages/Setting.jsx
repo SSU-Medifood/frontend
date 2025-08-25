@@ -9,7 +9,7 @@ import { useDeleteUser } from '../hooks/useDeleteUser'
 
 import { requestPermissionAndGetToken } from '../notifications'
 import { useDeleteFcmToken } from '../hooks/useDeleteFcmToken'
-import { useDeleteAllFcmTokens } from '../hooks/useDeleteAllFcmTokens'
+// import { useDeleteAllFcmTokens } from '../hooks/useDeleteAllFcmTokens'
 
 function Setting() {
     const navigate = useNavigate()
@@ -17,7 +17,7 @@ function Setting() {
     const { mutateAsync: setPushAlarmServer, isLoading: isPushMutating } = usePatchPushAlarm()
     const { mutateAsync: setMarketingServer, isLoading: isMktMutating } = usePatchMarketing()
     const { mutateAsync: deleteFcmToken } = useDeleteFcmToken()
-    const { mutateAsync: deleteAllFcmTokens } = useDeleteAllFcmTokens()
+    // const { mutateAsync: deleteAllFcmTokens } = useDeleteAllFcmTokens()
     const { mutateAsync: deleteUser } = useDeleteUser()
     
     const [pushAlarm, setPushAlarm] = useState(false)
@@ -130,9 +130,9 @@ function Setting() {
                     onClick={async () => {
                         const confirmed = window.confirm('정말로 회원 탈퇴하시겠습니까?\n탈퇴 시 모든 정보가 삭제됩니다.')
                         if (!confirmed) return
-                        try {
-                            await deleteAllFcmTokens()
-                        } catch { }
+                        // try {
+                        //     await deleteAllFcmTokens()
+                        // } catch { }
                         await deleteUser()
                     }}
                 >
