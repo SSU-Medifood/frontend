@@ -34,6 +34,17 @@ export const patchUserHealthInfo = async (updatedData) => {
     }
 };
 
+// uuid 발급
+export const getUuid = async () => { 
+    try {
+        const response = await api.get('/token/getUUID');
+        return response.data.data;
+    } catch (error) {
+        console.error('uuid 요청 에러:', error);
+        throw new Error('uuid를 발급받지 못했습니다.');
+    }
+};
+
 // 사용자 설정 조회 (푸시 알림, 마케팅 수신 동의)
 export const getUserSettings = async (deviceId) => {
     try {

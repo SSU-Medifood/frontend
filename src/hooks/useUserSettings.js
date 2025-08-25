@@ -5,7 +5,7 @@ export const useUserSettings = (opts = {}) => {
     
     const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
     const isAuthed = !!token;
-    const deviceId = typeof window !== 'undefined' ? localStorage.getItem('mefo_device_id') : null;
+    const deviceId = typeof window !== 'undefined' ? localStorage.getItem('deviceId') : null;
 
     return useQuery({
         queryKey: ['userSettings', deviceId],

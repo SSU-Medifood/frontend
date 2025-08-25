@@ -3,7 +3,7 @@ import { patchPushAlarmDevice } from '../api/user';
 
 export const usePatchPushAlarm = () => {
     const qc = useQueryClient();
-    const deviceId = typeof window !== 'undefined' ? localStorage.getItem('mefo_device_id') : null;
+    const deviceId = typeof window !== 'undefined' ? localStorage.getItem('deviceId') : null;
 
     return useMutation({
         mutationFn: (fcmToken) => patchPushAlarmDevice(deviceId, fcmToken),
