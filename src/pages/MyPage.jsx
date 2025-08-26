@@ -1,7 +1,6 @@
 import '../styles/shared.css'
 import '../styles/MyPage.css'
 import { useNavigate } from 'react-router-dom'
-import { useEffect } from 'react'
 import { useUserHealthInfo } from '../hooks/useUserHealthInfo'
 import { useUuid } from '../hooks/useUuid'
 import Navbar from '../components/Navbar'
@@ -9,17 +8,17 @@ import Navbar from '../components/Navbar'
 function MyPage() {
     const navigate = useNavigate()
     const { data: userInfo, isLoading, isError } = useUserHealthInfo()
-    const { data: uuidData } = useUuid()
+    const { data: uuidData, isLoading: uuidLoading, isError: uuidError } = useUuid()
 
     // uuid를 로컬에 저장
-    useEffect(() => {
-        const id = uuidData?.uuid
-        if (!id) return
-        try {
-            const existing = localStorage.getItem('deviceId')
-            if (!existing) localStorage.setItem('deviceId', id)
-        } catch {}
-    }, [uuidData?.uuid])
+    // useEffect(() => {
+    //     const id = uuidData?.uuid
+    //     if (!id) return
+    //     try {
+    //         const existing = localStorage.getItem('deviceId')
+    //         if (!existing) localStorage.setItem('deviceId', id)
+    //     } catch {}
+    // }, [uuidData?.uuid])
 
     // 생년월일 보기 좋게 쪼개주는 함수
     const formatBirth = (birth) => {
@@ -142,6 +141,10 @@ function MyPage() {
                         </span>
                     </div>
                 </div>
+
+                <p style={{ marginBottom: '70px', fontSize: '10px' }}>
+                    현재 device : {uuidData?.uuid}
+                </p>
             </div>
 
             <Navbar />
