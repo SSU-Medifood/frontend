@@ -38,7 +38,7 @@ function MyPage() {
         <>
             <div className="mypage-container">
                 <div className="mypage-header">
-                        <p className="mypage-title">마이페이지</p>
+                        <p className="mypage-title">마이페이지지</p>
                         <img
                             className="mypage-setting"
                             src="/images/setting.svg"
